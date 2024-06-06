@@ -33,7 +33,7 @@ function App() {
   };
 
   return (
-    <div className="container md:w-[50%] mx-auto">
+    <div className="container md:w-[50%] mx-auto mt-8">
       <div className="grid grid-cols-1 gap-1 border-b py-2">
         <input
           type="text"
