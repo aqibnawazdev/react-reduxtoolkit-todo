@@ -4,25 +4,27 @@ import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 import { TbEdit } from "react-icons/tb";
 import { MdDelete } from "react-icons/md";
+import { deleteTodo, addTodo, updateTodo } from "./features/todoSlice";
 
 function App() {
   const [input, setInput] = useState("");
   const [editId, setEditId] = useState(null);
-  const todos = useSelector((state) => state.todos.todos) || [];
+  const todos = useSelector((state) => state.todoReducer.todos);
+  console.log(todos);
   const dispatch = useDispatch();
 
   const handleAddTodo = () => {
     if (editId) {
-      dispatch();
+      dispatch(updateTodo({ id: editId, content: input }));
       setEditId(null);
     } else {
-      dispatch();
+      dispatch(addTodo({ id: Math.random() + 1 * 2, content: input }));
     }
     setInput("");
   };
 
   const handleDelete = (id) => {
-    dispatch();
+    dispatch(deleteTodo({ id }));
   };
 
   const handleEdit = (id, content) => {
@@ -48,7 +50,7 @@ function App() {
         </button>
       </div>
       <div className="w-full flex flex-col gap-1 todos-container bg-gray-100 rounded mt-2 p-2">
-        {todos.map((todo) => (
+        {todos?.map((todo) => (
           <div
             key={todo.id}
             className="flex justify-between items-center gap-1  "
